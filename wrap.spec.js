@@ -1,21 +1,28 @@
-function wrap(string, colNum) {
-  let finalWord = '';
-  const stringArr = string.split(" ");
+const { expect } = require('chai');
+const wrap = require('./wrap');
 
-  for (let i = 0; i < stringArr.length; i++) {
-    let countWordLength = 0;
+describe('wrap', () => {
+  it('Returns empty string if empty string was provided', () => {
+    expect(wrap('', 10)).to.equal('');
+  });
 
-    let currWord = stringArr[i]; //lorem
-    let wordLength = currWord.length; //5
-    countWordLength += wordLength;  //countWordLength = 5
+  it('Return string if colNum is 0', () => {
+    expect(wrap('cheese', 0)).to.equal('');
+  });
 
-    if (countWordLength <= colNum) {
-      finalWord += `${currWord} ` + 1
-    } else {
-      finalWord += `\n${}`
-      countWordLength = 0;
-    }
-  }
-  return finalWord;
-}
-//word += "\n" + "newWord"
+  it('Return string if colNum is greater than the strings length', () => {
+    expect(wrap('cheese', 10)).to.equal('cheese');
+  });
+  it('Insert a line break when the string is bigger than the colNum ', () => {
+    expect(wrap('i hope my side wins', 8)).to.equal(
+      `i hope
+      my side
+      wins`
+    );
+  });
+});
+
+// it('', () => {
+//   expect(wrap('',))
+//   .to.equal()
+// })
